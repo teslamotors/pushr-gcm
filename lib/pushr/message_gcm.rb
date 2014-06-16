@@ -10,7 +10,7 @@ module Pushr
                              allow_blank: true
 
     attr_accessor :type, :app, :registration_ids, :notification_key, :collapse_key, :delay_while_idle, :time_to_live, :data,
-                  :restricted_package_name, :dry_run
+                  :restricted_package_name, :dry_run, :external_id
 
     def to_message
       hsh = {}
@@ -24,6 +24,7 @@ module Pushr
     def to_json
       hsh = { type: self.class.to_s, app: app, registration_ids: registration_ids, notification_key: notification_key,
               collapse_key: collapse_key, delay_while_idle: delay_while_idle, time_to_live: time_to_live, data: data }
+      hsh[Pushr::Core.external_id_tag] = external_id if external_id
       MultiJson.dump(hsh)
     end
 
