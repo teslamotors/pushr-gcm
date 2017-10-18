@@ -18,7 +18,7 @@ module Pushr
         def handle_single(result, registration_id)
           if result.key?('error')
             if result['error'] == 'NotRegistered' || result['error'] == 'InvalidRegistration'
-              Pushr::FeedbackGcm.new(app: message.app, failed_at: Time.now, device: registration_id, follow_up: 'delete').save
+              Pushr::FeedbackGcm.create(app: message.app, failed_at: Time.now, device: registration_id, follow_up: 'delete')
             end
 
             if result['error'] == 'Unavailable'
@@ -35,7 +35,7 @@ module Pushr
             # success, but update device token
             hsh = { app: message.app, failed_at: Time.now, device: registration_id,
                     follow_up: 'update', update_to: result['registration_id'] }
-            Pushr::FeedbackGcm.new(hsh).save
+            Pushr::FeedbackGcm.create(hsh)
           end
         end
       end

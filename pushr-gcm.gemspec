@@ -24,7 +24,7 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency 'multi_json'
   s.add_runtime_dependency 'pushr-core'
   s.add_runtime_dependency 'activemodel'
-  s.add_development_dependency 'rspec', '3.0.0.beta2'
+  s.add_development_dependency 'rspec', '~> 3.0'
   s.add_development_dependency 'guard'
   s.add_development_dependency 'guard-rspec'
   s.add_development_dependency 'mock_redis'

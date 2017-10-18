@@ -4,4 +4,4 @@
 [![Code Climate](https://codeclimate.com/github/9to5/pushr-gcm.png)](https://codeclimate.com/github/9to5/pushr-gcm)
 [![Coverage Status](https://coveralls.io/repos/9to5/pushr-gcm/badge.png)](https://coveralls.io/r/9to5/pushr-gcm)
 
-Please see [pushr-core](https://github.com/tompesman/pushr-core) for more information.
+Please see [pushr-core](https://github.com/9to5/pushr-core) for more information.

@@ -17,11 +17,12 @@ describe Pushr::FeedbackGcm do
   end
 
   describe 'save' do
-    let(:feedback) { Pushr::FeedbackGcm.new(app: 'app_name', device: 'ab' * 20, follow_up: 'delete', failed_at: Time.now, update_to: nil) }
+    let!(:feedback) do
+      Pushr::FeedbackGcm.create(app: 'app_name', device: 'ab' * 20, follow_up: 'delete', failed_at: Time.now,
+                                update_to: nil)
+    end
     it 'should save a feedback' do
-      feedback.save
-      feedback2 = Pushr::Feedback.next
-      expect(feedback2.class).to eql(Pushr::FeedbackGcm)
+      expect(Pushr::Feedback.next.class).to eql(Pushr::FeedbackGcm)
     end
   end
 end

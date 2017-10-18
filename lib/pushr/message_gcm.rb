@@ -2,15 +2,14 @@ module Pushr
   class MessageGcm < Pushr::Message
     POSTFIX = 'gcm'
 
+    attr_accessor :registration_ids, :notification_key, :collapse_key, :delay_while_idle, :time_to_live, :data,
+                  :restricted_package_name, :dry_run
     validates :registration_ids, presence: true
     validate :registration_ids_array
     validate :data_size
     validates :delay_while_idle, :dry_run, inclusion: { in: [true, false] }, allow_blank: true
     validates :time_to_live, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than_or_equal_to: 2419200 },
                              allow_blank: true
-
-    attr_accessor :type, :app, :registration_ids, :notification_key, :collapse_key, :delay_while_idle, :time_to_live, :data,
-                  :restricted_package_name, :dry_run
 
     def to_message
       hsh = {}
@@ -21,10 +20,11 @@ module Pushr
       MultiJson.dump(hsh)
     end
 
-    def to_json
+    def to_hash
       hsh = { type: self.class.to_s, app: app, registration_ids: registration_ids, notification_key: notification_key,
               collapse_key: collapse_key, delay_while_idle: delay_while_idle, time_to_live: time_to_live, data: data }
-      MultiJson.dump(hsh)
+      hsh[Pushr::Core.external_id_tag] = external_id if external_id
+      hsh
     end
 
     private
