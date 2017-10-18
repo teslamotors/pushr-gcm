@@ -18,7 +18,7 @@ describe Pushr::MessageGcm do
   describe 'save' do
     let(:message) do
       hsh = { app: 'app_name', registration_ids: ['test'],  collapse_key: 'x',
-              delay_while_idle: false, time_to_live: 24 * 60 * 60, data: {} }
+              delay_while_idle: false, time_to_live: 24 * 60 * 60, data: {}, priority: 'normal' }
       Pushr::MessageGcm.new(hsh)
     end
 
